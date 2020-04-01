@@ -5,4 +5,8 @@ public class DAOFactory {
     public static DAO<Personnel> getPersonnelDAO(){
         return new PersonnelDAO();
     }
+    
+    public static DAO<GroupeComposite> getGroupeCompositeDAO(){
+        return new GoupeCompositeDAO();
+    }
 }
