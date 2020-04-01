@@ -1,5 +1,6 @@
 package fr.uvsq._1;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -41,6 +42,8 @@ public class GroupeIterator implements Iterator<Groupe> {
      * @return groupe suivant
      */
     public Groupe next() {
-        return l.get(cont);
+        Groupe tmp = l.get(cont);
+        cont = cont + 1;
+        return tmp;
         }
 }

@@ -10,4 +10,5 @@ public interface Groupe {
      * @param i profondeur
      */
     void affiche(int i);
+    String toString();
 }

@@ -4,10 +4,13 @@ import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDate;
 
+import org.junit.Test;
+
 import fr.uvsq._1.Personnel.builder;
 
 public class groupeCompositeTest 
-{
+{   
+    @Test
 	public void addTest()
 	{
 		GroupeComposite g = new GroupeComposite();
@@ -20,6 +23,7 @@ public class groupeCompositeTest
 		assertEquals(g.getL().get(0),p);
 	} 
 	
+    @Test
 	public void lecture_compositeTest()
 	{
 		GroupeComposite g = new GroupeComposite();  
@@ -32,6 +36,6 @@ public class groupeCompositeTest
 		g.add(p);
 		g.add(g2);
 		g2.add(p2);
-		g.affiche(0);
+		System.out.println(g);
 	}
 }

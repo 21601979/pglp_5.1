@@ -1,5 +1,6 @@
 package fr.uvsq._1;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -7,7 +8,11 @@ import java.util.ArrayList;
  * @author Tanguy
  *class personnel.
  */
-final class Personnel  implements Groupe {
+final class Personnel  implements Groupe, Serializable {
+    /**
+     * num de sérialisation
+     */
+    private static final long serialVersionUID = 1L;
     /**
      * nom du personnel.
      */

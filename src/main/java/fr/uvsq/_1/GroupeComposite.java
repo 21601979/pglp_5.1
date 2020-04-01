@@ -1,12 +1,17 @@
 package fr.uvsq._1;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 /**
  * @author Tanguy
  *class groupe composite.
  */
-public class GroupeComposite implements Groupe {
+public class GroupeComposite implements Groupe, Serializable {
+    /**
+     * num de serialisation
+     */
+    private static final long serialVersionUID = -364604849233971037L;
     /**
      * liste de groupe.
      */
@@ -30,7 +35,7 @@ public class GroupeComposite implements Groupe {
       * @param i artéfacte
       */
     public void affiche(int i) {
-        Iterator it = this.iterator();
+        Iterator<Groupe> it = this.iterator();
         while (it.hasNext()) {
             i++;
             ((GroupeComposite) it.next()).affiche(i);
@@ -42,4 +47,14 @@ public class GroupeComposite implements Groupe {
     public ListeGroupe getL() {
         return l;
     }
+    
+    public String toString() {
+        String temp = "";
+        Iterator<Groupe> it = this.iterator();
+        while (it.hasNext()) {
+            temp = temp + it.next().toString();
+            }
+        return temp;
+    }
+
 }

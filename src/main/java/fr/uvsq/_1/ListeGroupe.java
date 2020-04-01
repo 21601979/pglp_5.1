@@ -1,11 +1,16 @@
 package fr.uvsq._1;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 /**
  * class qui encapsule une liste.
  */
-public class ListeGroupe implements Iterable<Groupe> {
+public class ListeGroupe implements Iterable<Groupe>, Serializable {
+    /**
+     * num de serialisation
+     */
+    private static final long serialVersionUID = -5443695659401435201L;
     /**
      * liste qui contient des groupe ou des personnel.
      */
@@ -45,4 +50,9 @@ public class ListeGroupe implements Iterable<Groupe> {
     public Iterator<Groupe> iterator() {
             return new GroupeIterator(l);
         }
+    
+    public String toString()
+    {
+        return l.toString();
+    }
 }
