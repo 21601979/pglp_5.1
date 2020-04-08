@@ -3,6 +3,7 @@ package fr.uvsq._1;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -18,7 +19,12 @@ public class GoupeCompositeDAO extends DAO<GroupeComposite>{
           out.flush();
         } catch (java.io.IOException e) {
           e.printStackTrace(); 
-        } 
+        }
+        try {
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -29,6 +35,7 @@ public class GoupeCompositeDAO extends DAO<GroupeComposite>{
             final FileInputStream fichier = new FileInputStream(file);
             in = new ObjectInputStream(fichier);
             ret = (GroupeComposite) in.readObject();
+            fichier.close();
         } catch (java.io.IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -51,7 +58,6 @@ public class GoupeCompositeDAO extends DAO<GroupeComposite>{
                 }
             }
         }
-        System.out.println(obj.getID());
         this.serialize(obj,"GroupeComposite\\" + (obj.getID()));
     }
 
@@ -75,13 +81,9 @@ public class GoupeCompositeDAO extends DAO<GroupeComposite>{
 
     @Override
     public void delete(GroupeComposite obj) {
-        int i;
-        File repertoire = new File("GroupeComposite");
-        String liste[] = repertoire.list();
-        for(i=0;i<liste.length;i++) {
-           File del = new File("GroupeComposite\\" + liste[i]);
-           del.delete();
-           
+        if(this.find(obj.getID()+"") != null){
+            File del = new File("GroupeComposite\\" + obj.getID());
+            del.delete();
         }
     }
 

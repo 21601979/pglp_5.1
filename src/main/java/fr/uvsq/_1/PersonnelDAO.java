@@ -3,6 +3,7 @@ package fr.uvsq._1;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -17,8 +18,13 @@ public class PersonnelDAO extends DAO<Personnel>{
           out.writeObject(obj);
           out.flush();
         } catch (java.io.IOException e) {
-          e.printStackTrace(); 
-        } 
+          e.printStackTrace();
+        }
+        try {
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -29,6 +35,7 @@ public class PersonnelDAO extends DAO<Personnel>{
             final FileInputStream fichier = new FileInputStream(file);
             in = new ObjectInputStream(fichier);
             ret = (Personnel) in.readObject();
+            fichier.close();
         } catch (java.io.IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -47,9 +54,7 @@ public class PersonnelDAO extends DAO<Personnel>{
                 throw new existeDejaException(); 
             }
         }
-        System.out.println(obj.getID());
         this.serialize(obj,"Personnel\\" + (obj.getID()));
-        System.out.println("Personnel\\" + (obj.getID()));
     }
 
     @Override
@@ -72,12 +77,9 @@ public class PersonnelDAO extends DAO<Personnel>{
 
     @Override
     public void delete(Personnel obj) {
-        int i;
-        File repertoire = new File("Personnel");
-        String liste[] = repertoire.list();
-        for(i=0;i<liste.length;i++) {
-           File del = new File("Personnel\\" + liste[i]);
-           del.delete();
+        if(this.find(obj.getID()+"") != null){
+            File del = new File("Personnel\\" + obj.getID());
+            del.delete();
         }
     }
 
