@@ -13,6 +13,10 @@ public class GroupeComposite implements Groupe, Serializable {
      */
     private static final long serialVersionUID = -364604849233971037L;
     /**
+     * id d'un groupe composite
+     */
+    private int ID;
+    /**
      * liste de groupe.
      */
     private ListeGroupe l = new ListeGroupe();
@@ -20,6 +24,11 @@ public class GroupeComposite implements Groupe, Serializable {
      * methode qui ajoute un groupe composite.
      * @param compo : groupe a ajouter
      */
+    
+    public GroupeComposite(int ID) {
+        this.ID = ID;
+    }
+
     public void add(final Groupe compo) {
         getL().add(compo);
         }
@@ -48,6 +57,14 @@ public class GroupeComposite implements Groupe, Serializable {
         return l;
     }
     
+    public boolean equals(GroupeComposite c) {
+        if(this.toString().equals(c.toString())) {
+            return true;
+        }
+        return false;
+    }
+    
+    
     public String toString() {
         String temp = "";
         Iterator<Groupe> it = this.iterator();
@@ -55,6 +72,10 @@ public class GroupeComposite implements Groupe, Serializable {
             temp = temp + it.next().toString();
             }
         return temp;
+    }
+
+    public int getID() {
+        return ID;
     }
 
 }

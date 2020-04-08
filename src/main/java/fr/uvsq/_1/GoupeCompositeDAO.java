@@ -1,5 +1,6 @@
 package fr.uvsq._1;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -11,7 +12,7 @@ public class GoupeCompositeDAO extends DAO<GroupeComposite>{
     public void serialize(GroupeComposite obj, String file) {
         ObjectOutputStream out = null;
         try {
-          final FileOutputStream fichier = new FileOutputStream("test");
+          final FileOutputStream fichier = new FileOutputStream(file);
           out = new ObjectOutputStream(fichier);
           out.writeObject(obj);
           out.flush();
@@ -25,7 +26,7 @@ public class GoupeCompositeDAO extends DAO<GroupeComposite>{
         ObjectInputStream in = null;
         GroupeComposite ret = null;
         try {
-            final FileInputStream fichier = new FileInputStream("test");
+            final FileInputStream fichier = new FileInputStream(file);
             in = new ObjectInputStream(fichier);
             ret = (GroupeComposite) in.readObject();
         } catch (java.io.IOException e) {
@@ -34,6 +35,69 @@ public class GoupeCompositeDAO extends DAO<GroupeComposite>{
             e.printStackTrace();
             }
         return ret;
+    }
+
+    @Override
+    public void Create(GroupeComposite obj) throws existeDejaException {
+        int i;
+        File repertoire = new File("GroupeComposite");
+        String liste[] = repertoire.list();
+        if(liste.length == 0){
+        }
+        else {
+            for(i=0;i<liste.length;i++) {
+                if(Integer.parseInt(liste[i]) == obj.getID()) {
+                    throw new existeDejaException(); 
+                }
+            }
+        }
+        System.out.println(obj.getID());
+        this.serialize(obj,"GroupeComposite\\" + (obj.getID()));
+    }
+
+    @Override
+    public GroupeComposite find(String ID) {
+        int i;
+        File repertoire = new File("GroupeComposite");
+        String liste[] = repertoire.list();
+        if(liste.length == 0){
+            return null;
+        }
+        else {
+            for(i=0;i<liste.length;i++) {
+                if(liste[i].equals(ID)) {
+                    return this.deserialize("GroupeComposite\\" + liste[i]);
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void delete(GroupeComposite obj) {
+        int i;
+        File repertoire = new File("GroupeComposite");
+        String liste[] = repertoire.list();
+        for(i=0;i<liste.length;i++) {
+           File del = new File("GroupeComposite\\" + liste[i]);
+           del.delete();
+           
+        }
+    }
+
+    @Override
+    public GroupeComposite update(GroupeComposite obj) {
+        GroupeComposite up = this.find(obj.getID()+"");
+        if(up != null) {
+            this.delete(up);
+            try {
+                this.Create(obj);
+            } catch (existeDejaException e) {
+                return null;
+            }
+            return obj;
+        }
+        return null;
     }
 
 }

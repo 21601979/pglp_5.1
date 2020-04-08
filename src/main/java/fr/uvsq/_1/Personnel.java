@@ -33,6 +33,11 @@ final class Personnel  implements Groupe, Serializable {
      * liste des numéros de telephone d'un personnel.
      */
     private ArrayList<String> telephone;
+    
+    /**
+     * id d'un personel.
+     */
+    private int ID;
 
     /**
      * @author Tanguy
@@ -60,18 +65,23 @@ final class Personnel  implements Groupe, Serializable {
          */
         private ArrayList<String> telephone;
         /**
+         * id d'un personel.
+         */
+        private int ID;
+        /**
          * construction du builder.
          * @param nom nom
          * @param prenom prenom
          * @param dateNaissance date de naissance
          */
         builder(final String nom, final String prenom,
-                final LocalDate dateNaissance) {
+                final LocalDate dateNaissance, final int ID) {
             this.nom = nom;
             this.prenom = prenom;
             this.setDateNaissance(dateNaissance);
             this.fonctions = "";
             this.telephone = new ArrayList<String>();
+            this.ID = ID;
             }
         /**
          * methode qui ajoute une date de naissance .
@@ -134,6 +144,7 @@ final class Personnel  implements Groupe, Serializable {
         this.fonctions = b.fonctions;
         this.dateNaissance = b.dateNaissance;
         this.telephone = b.telephone;
+        this.ID = b.ID;
         }
 
     /**
@@ -142,5 +153,12 @@ final class Personnel  implements Groupe, Serializable {
     public String toString()
     {
         return telephone.toString() + " " + fonctions + " " + dateNaissance.toString() + " " + prenom + " " + nom;
+    }
+    /**
+     * renvoi l'identifinant d'un personnel
+     * @return
+     */
+    public int getID() {
+        return ID;
     }
 }

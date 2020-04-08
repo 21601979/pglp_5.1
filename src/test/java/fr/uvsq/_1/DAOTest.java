@@ -13,7 +13,7 @@ public class DAOTest {
     @Test
     public void PersonnelDAOTest()
     {
-        builder b = new builder("taga","da",LocalDate.of(1, 1, 1));
+        builder b = new builder("taga","da",LocalDate.of(1, 1, 1),1);
         Personnel p = b.build();
         Personnel p2 = null;
         DAO<Personnel> DAOP = DAOFactory.getPersonnelDAO();
@@ -24,11 +24,11 @@ public class DAOTest {
     
     @Test
     public void GroupeCompositeTestDAO() {
-        GroupeComposite g = new GroupeComposite();  
-        GroupeComposite g2 = new GroupeComposite();
-        builder b = new builder("charl","atant",LocalDate.of(1, 1, 1));
+        GroupeComposite g = new GroupeComposite(1);  
+        GroupeComposite g2 = new GroupeComposite(2);
+        builder b = new builder("charl","atant",LocalDate.of(1, 1, 1),1);
         Personnel p = b.build();
-        builder b2 = new builder("bri","oche",LocalDate.of(1, 1, 1));
+        builder b2 = new builder("bri","oche",LocalDate.of(1, 1, 1),1);
         Personnel p2 = b2.build();
         g.add(p);
         g.add(g2);

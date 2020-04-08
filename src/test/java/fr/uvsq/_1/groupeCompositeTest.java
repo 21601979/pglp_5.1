@@ -13,10 +13,10 @@ public class groupeCompositeTest
     @Test
 	public void addTest()
 	{
-		GroupeComposite g = new GroupeComposite();
-		GroupeComposite g2 = new GroupeComposite();
+		GroupeComposite g = new GroupeComposite(1);
+		GroupeComposite g2 = new GroupeComposite(2);
 
-		builder b = new builder("bow","ser",LocalDate.of(1, 1, 1));
+		builder b = new builder("bow","ser",LocalDate.of(1, 1, 1),1);
 		Personnel p = b.build();
 		g.add(p);
 		g.add(g2);
@@ -26,12 +26,12 @@ public class groupeCompositeTest
     @Test
 	public void lecture_compositeTest()
 	{
-		GroupeComposite g = new GroupeComposite();  
-		GroupeComposite g2 = new GroupeComposite();
+		GroupeComposite g = new GroupeComposite(1);  
+		GroupeComposite g2 = new GroupeComposite(2);
 
-		builder b = new builder("bow","ser",LocalDate.of(1, 1, 1));
+		builder b = new builder("bow","ser",LocalDate.of(1, 1, 1),1);
 		Personnel p = b.build();
-		builder b2 = new builder("ma","rio",LocalDate.of(1, 1, 1));
+		builder b2 = new builder("ma","rio",LocalDate.of(1, 1, 1),1);
 		Personnel p2 = b2.build();
 		g.add(p);
 		g.add(g2);

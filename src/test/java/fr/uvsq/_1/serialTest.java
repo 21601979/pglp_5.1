@@ -15,7 +15,7 @@ import fr.uvsq._1.Personnel.builder;
 public class serialTest {
     @Test
     public void serialPersonelTest() {
-        builder b = new builder("bow","ser",LocalDate.of(1, 1, 1));
+        builder b = new builder("bow","ser",LocalDate.of(1, 1, 1),1);
         Personnel p = b.build();
         Personnel p2 = null;
         ObjectOutputStream out = null;
@@ -44,7 +44,7 @@ public class serialTest {
 
     @Test
     public void serialListeGroupeTest() {
-        builder b = new builder("bow","ser",LocalDate.of(1, 1, 1));
+        builder b = new builder("bow","ser",LocalDate.of(1, 1, 1),1);
         Personnel p = b.build();
         ListeGroupe g = new ListeGroupe();
         ListeGroupe g2 = new ListeGroupe();
@@ -75,12 +75,12 @@ public class serialTest {
     
     @Test
     public void serialGroupeCompositeTest() {
-        GroupeComposite g = new GroupeComposite();  
-        GroupeComposite g2 = new GroupeComposite();
+        GroupeComposite g = new GroupeComposite(1);  
+        GroupeComposite g2 = new GroupeComposite(2);
 
-        builder b = new builder("bow","ser",LocalDate.of(1, 1, 1));
+        builder b = new builder("bow","ser",LocalDate.of(1, 1, 1),1);
         Personnel p = b.build();
-        builder b2 = new builder("ma","rio",LocalDate.of(1, 1, 1));
+        builder b2 = new builder("ma","rio",LocalDate.of(1, 1, 1),1);
         Personnel p2 = b2.build();
         g.add(p);
         g.add(g2);
