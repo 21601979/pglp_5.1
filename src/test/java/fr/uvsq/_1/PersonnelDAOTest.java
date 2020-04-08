@@ -24,39 +24,39 @@ public class PersonnelDAOTest {
     }
     
     @Test
-    public void CreateFindTest() throws existeDejaException{
+    public void CreateFindTest() throws ExisteDejaException{
         File del = new File("Personnel\\" + 1);
         del.delete();
         builder b = new builder("charl","atant",LocalDate.of(1, 1, 1),1);
         Personnel p = b.build();
         DAO<Personnel> DAOP = DAOFactory.getPersonnelDAO();
-        DAOP.Create(p);
+        DAOP.create(p);
         assertEquals(DAOP.find("1").toString(),p.toString());
     }
 
     @Test
-    public void DeletTest() throws existeDejaException {
+    public void DeletTest() throws ExisteDejaException {
         File del = new File("Personnel\\" + 1);
         del.delete();
         builder b = new builder("charl","atant",LocalDate.of(1, 1, 1),1);
         Personnel p = b.build();
         DAO<Personnel> DAOP = DAOFactory.getPersonnelDAO();
-        DAOP.Create(p);
+        DAOP.create(p);
         DAOP.delete(p);
         
         assertTrue(DAOP.find("1") == null);
     }
     
     @Test
-    public void UpdateTest() throws existeDejaException {
+    public void UpdateTest() throws ExisteDejaException {
         File del = new File("Personnel\\" + 1);
         del.delete();
         builder b = new builder("charl","atant",LocalDate.of(1, 1, 1),1);
         Personnel p = b.build();
         DAO<Personnel> DAOP = DAOFactory.getPersonnelDAO();
-        DAOP.Create(p);
+        DAOP.create(p);
         builder b2 = new builder("charl","atant",LocalDate.of(10, 10, 10),1);
-        Personnel p2 = b.build();
+        Personnel p2 = b2.build();
         DAOP.update(p2);
         assertEquals(p2.toString(),DAOP.find("1").toString());
     }

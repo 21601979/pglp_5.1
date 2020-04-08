@@ -1,6 +1,5 @@
 package fr.uvsq._1;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -20,10 +19,10 @@ public class GroupeIterator implements Iterator<Groupe> {
 
     /**
      * constructeur de groupeIterator.
-     * @param l liste
+     * @param list liste
      */
-    public GroupeIterator(final ArrayList<Groupe> l) {
-        this.l = l;
+    public GroupeIterator(final ArrayList<Groupe> list) {
+        this.l = list;
         }
 
     /**

@@ -6,11 +6,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
-public class PersonnelDAO extends DAO<Personnel>{
-
+/**
+ * class personnel DAO.
+ * @author Tanguy
+ */
+public class PersonnelDAO extends DAO<Personnel> {
+    /**
+     * methode de sérialisation d'un objet personnel.
+     */
     @Override
-    public void serialize(Personnel obj, String file) {
+    public void serialize(final Personnel obj, final String file) {
         ObjectOutputStream out = null;
         try {
           final FileOutputStream fichier = new FileOutputStream(file);
@@ -26,9 +31,11 @@ public class PersonnelDAO extends DAO<Personnel>{
             e.printStackTrace();
         }
     }
-
+    /**
+     * methode de desérialisation d'un objet personnel.
+     */
     @Override
-    public Personnel deserialize(String file) {
+    public Personnel deserialize(final String file) {
         ObjectInputStream in = null;
         Personnel ret = null;
         try {
@@ -43,54 +50,61 @@ public class PersonnelDAO extends DAO<Personnel>{
             }
         return ret;
     }
-
+    /**
+     * methode de sauvegarde d'un objet personnel.
+     */
     @Override
-    public void Create(Personnel obj) throws existeDejaException {
+    public void create(final Personnel obj) throws ExisteDejaException {
         int i;
         File repertoire = new File("Personnel");
-        String liste[] = repertoire.list();
-        for(i=0;i<liste.length;i++) {
-            if(Integer.parseInt(liste[i]) == obj.getID()) {
-                throw new existeDejaException(); 
+        String[] liste = repertoire.list();
+        for (i = 0; i < liste.length; i++) {
+            if (Integer.parseInt(liste[i]) == obj.getID()) {
+                throw new ExisteDejaException();
             }
         }
-        this.serialize(obj,"Personnel\\" + (obj.getID()));
+        this.serialize(obj, "Personnel\\" + (obj.getID()));
     }
-
+    /**
+     * methode de rechercher d'un objet personnel sauvegardé.
+     */
     @Override
-    public Personnel find(String ID) {
+    public Personnel find(final String iD) {
         int i;
         File repertoire = new File("Personnel");
-        String liste[] = repertoire.list();
-        if(liste.length == 0){
+        String[] liste = repertoire.list();
+        if (liste.length == 0) {
             return null;
-        }
-        else {
-            for(i=0;i<liste.length;i++) {
-                if(liste[i].equals(ID)) {
+        } else {
+            for (i = 0; i < liste.length; i++) {
+                if (liste[i].equals(iD)) {
                     return this.deserialize("Personnel\\" + liste[i]);
                 }
             }
         }
         return null;
     }
-
+    /**
+     * methode de supression d'un objet sauvegardé.
+     */
     @Override
-    public void delete(Personnel obj) {
-        if(this.find(obj.getID()+"") != null){
+    public void delete(final Personnel obj) {
+        if (this.find(obj.getID() + "") != null) {
             File del = new File("Personnel\\" + obj.getID());
             del.delete();
         }
     }
-
+    /**
+     * methode d'update d'un objet sauvegardé.
+     */
     @Override
-    public Personnel update(Personnel obj) {
-        Personnel up = this.find(obj.getID()+"");
-        if(up != null) {
+    public Personnel update(final Personnel obj) {
+        Personnel up = this.find(obj.getID() + "");
+        if (up != null) {
             this.delete(up);
             try {
-                this.Create(obj);
-            } catch (existeDejaException e) {
+                this.create(obj);
+            } catch (ExisteDejaException e) {
                 return null;
             }
             return obj;

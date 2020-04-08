@@ -9,26 +9,28 @@ import java.util.Iterator;
  */
 public class GroupeComposite implements Groupe, Serializable {
     /**
-     * num de serialisation
+     * num de serialisation.
      */
     private static final long serialVersionUID = -364604849233971037L;
     /**
-     * id d'un groupe composite
+     * id d'un groupe composite.
      */
-    private int ID;
+    private int iD;
     /**
      * liste de groupe.
      */
     private ListeGroupe l = new ListeGroupe();
     /**
+     * constructeur de groupeComposite.
+     * @param set id
+     */
+    public GroupeComposite(final int set) {
+        this.iD = set;
+    }
+    /**
      * methode qui ajoute un groupe composite.
      * @param compo : groupe a ajouter
      */
-    
-    public GroupeComposite(int ID) {
-        this.ID = ID;
-    }
-
     public void add(final Groupe compo) {
         getL().add(compo);
         }
@@ -43,11 +45,12 @@ public class GroupeComposite implements Groupe, Serializable {
       * methode qui affiche un éllement i d'un groupe.
       * @param i artéfacte
       */
-    public void affiche(int i) {
+    public void affiche(final int i) {
         Iterator<Groupe> it = this.iterator();
+        int i2 = i;
         while (it.hasNext()) {
-            i++;
-            ((GroupeComposite) it.next()).affiche(i);
+            i2++;
+            ((GroupeComposite) it.next()).affiche(i2);
             }
         }
     /**
@@ -56,15 +59,21 @@ public class GroupeComposite implements Groupe, Serializable {
     public ListeGroupe getL() {
         return l;
     }
-    
-    public boolean equals(GroupeComposite c) {
-        if(this.toString().equals(c.toString())) {
+    /**
+     * methode qui test si deux groupes composites sont égaux.
+     * @param c groupe composite
+     * @return si égalité : true, sinon false
+     */
+    public boolean equals(final GroupeComposite c) {
+        if (this.toString().equals(c.toString())) {
             return true;
         }
         return false;
     }
-    
-    
+    /**
+     * retour de la chaine de char qui represente un groupe composite.
+     * @return string corepondant a un groupe composite
+     */
     public String toString() {
         String temp = "";
         Iterator<Groupe> it = this.iterator();
@@ -73,9 +82,12 @@ public class GroupeComposite implements Groupe, Serializable {
             }
         return temp;
     }
-
+    /**
+     * methode qui permet de récupérer l'id d'un groupe composite.
+     * @return id d'un groupe composite
+     */
     public int getID() {
-        return ID;
+        return iD;
     }
 
 }

@@ -6,11 +6,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
-public class GoupeCompositeDAO extends DAO<GroupeComposite>{
-
+/**
+ * class groupeCompositeDAO.
+ * @author Tanguy
+ */
+public class GoupeCompositeDAO extends DAO<GroupeComposite> {
+    /**
+     * methode de sérailisation d'un groupe Composite.
+     */
     @Override
-    public void serialize(GroupeComposite obj, String file) {
+    public void serialize(final GroupeComposite obj, final String file) {
         ObjectOutputStream out = null;
         try {
           final FileOutputStream fichier = new FileOutputStream(file);
@@ -18,7 +23,7 @@ public class GoupeCompositeDAO extends DAO<GroupeComposite>{
           out.writeObject(obj);
           out.flush();
         } catch (java.io.IOException e) {
-          e.printStackTrace(); 
+          e.printStackTrace();
         }
         try {
             out.close();
@@ -26,9 +31,11 @@ public class GoupeCompositeDAO extends DAO<GroupeComposite>{
             e.printStackTrace();
         }
     }
-
+    /**
+     * methode de deserialisation d'un groupe composite.
+     */
     @Override
-    public GroupeComposite deserialize(String file) {
+    public GroupeComposite deserialize(final String file) {
         ObjectInputStream in = null;
         GroupeComposite ret = null;
         try {
@@ -43,58 +50,62 @@ public class GoupeCompositeDAO extends DAO<GroupeComposite>{
             }
         return ret;
     }
-
+    /**
+     * methode d'aout de la sérialisatioàn d'un objet.
+     */
     @Override
-    public void Create(GroupeComposite obj) throws existeDejaException {
+    public void create(final GroupeComposite obj) throws ExisteDejaException {
         int i;
         File repertoire = new File("GroupeComposite");
-        String liste[] = repertoire.list();
-        if(liste.length == 0){
-        }
-        else {
-            for(i=0;i<liste.length;i++) {
-                if(Integer.parseInt(liste[i]) == obj.getID()) {
-                    throw new existeDejaException(); 
-                }
+        String[] liste = repertoire.list();
+
+        for (i = 0; i < liste.length; i++) {
+            if (Integer.parseInt(liste[i]) == obj.getID()) {
+                throw new ExisteDejaException();
             }
         }
-        this.serialize(obj,"GroupeComposite\\" + (obj.getID()));
+        this.serialize(obj, "GroupeComposite\\" + (obj.getID()));
     }
-
+    /**
+     * methode de recherche d'un objet serilisé.
+     */
     @Override
-    public GroupeComposite find(String ID) {
+    public GroupeComposite find(final String iD) {
         int i;
         File repertoire = new File("GroupeComposite");
-        String liste[] = repertoire.list();
-        if(liste.length == 0){
+        String[] liste = repertoire.list();
+        if (liste.length == 0) {
             return null;
-        }
-        else {
-            for(i=0;i<liste.length;i++) {
-                if(liste[i].equals(ID)) {
+        } else {
+            for (i = 0; i < liste.length; i++) {
+                if (liste[i].equals(iD)) {
                     return this.deserialize("GroupeComposite\\" + liste[i]);
                 }
             }
         }
         return null;
     }
-
+    /**
+     * methode de supression d'un objet sérialisée.
+     */
     @Override
-    public void delete(GroupeComposite obj) {
-        if(this.find(obj.getID()+"") != null){
+    public void delete(final GroupeComposite obj) {
+        if (this.find(obj.getID() + "") != null) {
             File del = new File("GroupeComposite\\" + obj.getID());
             del.delete();
         }
     }
-
+    /**
+     * methode d'update d'un objet sérialisé.
+     */
     @Override
-    public GroupeComposite update(GroupeComposite obj) {
-        GroupeComposite up = this.find(obj.getID()+"");
-        if(up != null) {
+    public GroupeComposite update(final GroupeComposite obj) {
+        GroupeComposite up = this.find(obj.getID() + "");
+        if (up != null) {
             this.delete(up);
             try {
-                this.Create(obj);
-            } catch (existeDejaException e) {
+                this.create(obj);
+            } catch (ExisteDejaException e) {
                 return null;
             }
             return obj;

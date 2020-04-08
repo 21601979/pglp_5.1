@@ -29,7 +29,7 @@ public class GroupeCompositeDAOTest {
     }
     
     @Test
-    public void CreateFindTest() throws existeDejaException{
+    public void CreateFindTest() throws ExisteDejaException{
         File del = new File("GroupeComposite\\" + 1);
         del.delete();
         GroupeComposite g = new GroupeComposite(1);  
@@ -42,7 +42,7 @@ public class GroupeCompositeDAOTest {
         g.add(g2);
         g2.add(p2);
         DAO<GroupeComposite> DAOP = DAOFactory.getGroupeCompositeDAO();
-        DAOP.Create(g);
+        DAOP.create(g);
         assertEquals(DAOP.find("1").toString(),g.toString());
     }
 
@@ -53,8 +53,8 @@ public class GroupeCompositeDAOTest {
         GroupeComposite g = new GroupeComposite(3);  
         DAO<GroupeComposite> DAOP = DAOFactory.getGroupeCompositeDAO();
         try {
-            DAOP.Create(g);
-        } catch (existeDejaException e) {
+            DAOP.create(g);
+        } catch (ExisteDejaException e) {
             e.printStackTrace();
         }
         DAOP.delete(g);
@@ -69,8 +69,8 @@ public class GroupeCompositeDAOTest {
         GroupeComposite g = new GroupeComposite(3);  
         DAO<GroupeComposite> DAOP = DAOFactory.getGroupeCompositeDAO();
         try {
-            DAOP.Create(g);
-        } catch (existeDejaException e) {
+            DAOP.create(g);
+        } catch (ExisteDejaException e) {
             e.printStackTrace();
         }
         builder b = new builder("charl","atant",LocalDate.of(1, 1, 1),2);

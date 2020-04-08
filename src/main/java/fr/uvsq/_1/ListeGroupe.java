@@ -8,7 +8,7 @@ import java.util.Iterator;
  */
 public class ListeGroupe implements Iterable<Groupe>, Serializable {
     /**
-     * num de serialisation
+     * num de serialisation.
      */
     private static final long serialVersionUID = -5443695659401435201L;
     /**
@@ -50,9 +50,11 @@ public class ListeGroupe implements Iterable<Groupe>, Serializable {
     public Iterator<Groupe> iterator() {
             return new GroupeIterator(l);
         }
-    
-    public String toString()
-    {
+    /**
+     * methode qui revoi le string représentant une liste de groupe.
+     * @return string
+     */
+    public String toString() {
         return l.toString();
     }
 }

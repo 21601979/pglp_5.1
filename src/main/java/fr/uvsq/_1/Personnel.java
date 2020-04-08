@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 final class Personnel  implements Groupe, Serializable {
     /**
-     * num de sérialisation
+     * num de sérialisation.
      */
     private static final long serialVersionUID = 1L;
     /**
@@ -33,11 +33,11 @@ final class Personnel  implements Groupe, Serializable {
      * liste des numéros de telephone d'un personnel.
      */
     private ArrayList<String> telephone;
-    
+
     /**
      * id d'un personel.
      */
-    private int ID;
+    private int iD;
 
     /**
      * @author Tanguy
@@ -67,29 +67,29 @@ final class Personnel  implements Groupe, Serializable {
         /**
          * id d'un personel.
          */
-        private int ID;
+        private int iD;
         /**
          * construction du builder.
-         * @param nom nom
-         * @param prenom prenom
-         * @param dateNaissance date de naissance
+         * @param no nom
+         * @param pre prenom
+         * @param date date de naissance
+         * @param iDent id d'un personnel
          */
-        builder(final String nom, final String prenom,
-                final LocalDate dateNaissance, final int ID) {
-            this.nom = nom;
-            this.prenom = prenom;
-            this.setDateNaissance(dateNaissance);
+        builder(final String no, final String pre,
+                final LocalDate date, final int iDent) {
+            this.nom = no;
+            this.prenom = pre;
+            this.setDateNaissance(date);
             this.fonctions = "";
             this.telephone = new ArrayList<String>();
-            this.ID = ID;
+            this.iD = iDent;
             }
         /**
          * methode qui ajoute une date de naissance .
-         * @param dateNaissance date de naissance
+         * @param date date de naissance
          */
-        private void setDateNaissance(LocalDate dateNaissance) 
-        {
-            this.dateNaissance  = dateNaissance;    
+        private void setDateNaissance(final LocalDate date) {
+            this.dateNaissance  = date;
         }
 
         /**
@@ -115,11 +115,12 @@ final class Personnel  implements Groupe, Serializable {
             }
 
         /**
-         * 
+         * @return descritpion de l'objet.
          */
-        public String toString()
-        {
-            return telephone.toString() + " " + fonctions + " " + dateNaissance.toString() + " " + prenom + " " + nom;
+        public String toString() {
+            return telephone.toString() + " " + fonctions
+                    + " " + dateNaissance.toString() + " "
+                    + prenom + " " + nom;
         }
         }
     /**
@@ -144,21 +145,22 @@ final class Personnel  implements Groupe, Serializable {
         this.fonctions = b.fonctions;
         this.dateNaissance = b.dateNaissance;
         this.telephone = b.telephone;
-        this.ID = b.ID;
+        this.iD = b.iD;
         }
 
     /**
-     * @return String 
+     * @return String
      */
-    public String toString()
-    {
-        return telephone.toString() + " " + fonctions + " " + dateNaissance.toString() + " " + prenom + " " + nom;
+    public String toString() {
+        return telephone.toString() + " " + fonctions
+                + " " + dateNaissance.toString() + " " + prenom
+                + " " + nom;
     }
     /**
-     * renvoi l'identifinant d'un personnel
-     * @return
+     * renvoi l'identifinant d'un personnel.
+     * @return ID
      */
     public int getID() {
-        return ID;
+        return iD;
     }
 }
